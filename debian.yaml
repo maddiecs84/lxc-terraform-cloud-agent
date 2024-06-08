@@ -106,6 +106,7 @@ files:
     EnvironmentFile=/opt/tfc_agent/.env
     ExecStart=/opt/tfc_agent/tfc-agent
     Restart=always
+    PassEnvironment=TFC_AGENT_TOKEN TFC_AGENT_NAME
 
     [Install]
     WantedBy=multi-user.target
@@ -163,6 +164,7 @@ actions:
     set -eux
 
     useradd -M -r -s /sbin/nologin tfc_agent
+    mkhomedir_helper tfc_agent
 
     mkdir -p /opt/tfc_agent
     unzip /usr/share/tfc_agent/tfc-agent.zip -d /opt/tfc_agent
